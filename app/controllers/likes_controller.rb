@@ -3,11 +3,11 @@ class LikesController < ApplicationController
   def index
     @concerts = current_user.concerts
     @users = User.all.map do |user|
-      user.profile if user.concerts.ids == @concerts.ids and user.id != current_user.id
+      user.profile&.attributes&.merge(imgurl: user.imgurl) if user.concerts.ids == @concerts.ids and user.id != current_user.id
     end
     render json: {
-    users: @users.compact!.map{|profile| profile.attributes.merge(imgurl: p.user.imgurl) },
-    concerts: @concert
+    users: @users.compact,
+    concerts: @concerts
    }
   end
   def create
