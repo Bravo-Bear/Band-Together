@@ -14,7 +14,6 @@ export default class Users extends Component {
   state = {
     users: [],
     concerts: [],
-    image: [],
     like: false
   }
   toggleModal = () => {
@@ -25,8 +24,7 @@ export default class Users extends Component {
       .then((response) => {
         const users = response.data.users
         const concerts = response.data.concerts
-        const image = response.data.images
-        this.setState({ users, image, concerts })
+        this.setState({ users, concerts })
       })
   }
   handleLike = (userId) => {
@@ -57,7 +55,7 @@ export default class Users extends Component {
       return (
         <div>
           <User
-            image={this.state.image[0]}
+            image={user.imgurl}
             user={user}
             handleLike={this.handleLike}
             handleDislike={this.handleDislike}
